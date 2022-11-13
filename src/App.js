@@ -11,11 +11,17 @@ function App() {
   }
 
   const handlenumber = (event) =>{
-    const array1 = Display.split(' ') 
-    const lastE =  array1[array1.length -1]
       const number = event.target.textContent;
-      if(Display === 0){
-            setDisplay(number);
+      if(Display == '0'){
+            if(number ==  '0'){
+                event.stopPropagation()
+            }else{
+              if(number == '.'){
+                  setDisplay(prev => prev + number); 
+              }else{
+                  setDisplay(number); 
+              }
+            }
       }
     else{
       setDisplay(Display+number)
@@ -36,12 +42,12 @@ function App() {
   }
 
   const handledecimal = () =>{
-      const array = Display.split(' ');
-      const lastEleme = array[array.length - 1];
+      // const array = Display.split('');
+      // const lastEleme = array[array.length - 1];
       
-      if(!lastEleme.includes('.')){
-         setDisplay(Display+'.')
-      }
+      // if(!lastEleme.includes('.')){
+      //    setDisplay(Display+'.')
+      // }
   }
 
   return (
@@ -68,7 +74,7 @@ function App() {
   <div id="multiply" onClick={handleopreator}>*</div>
   <div id="add" onClick={handleopreator}>+</div>
   <div id="divide" onClick={handleopreator}>/</div>
-  <div id="decimal" onClick={handledecimal}>.</div>
+  <div id="decimal" onClick={handlenumber}>.</div>
   <div id="equals" onClick={handleequal}>=</div>
   <div id="subtract" onClick={handleopreator}>-</div>
 </div>;
